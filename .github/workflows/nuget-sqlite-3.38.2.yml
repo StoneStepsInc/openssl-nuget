@@ -45,13 +45,10 @@ on:
 # adding or removing files, changing any text in README files, etc.
 #
 env:
-  PKG_VER: 3.38.2
-  PKG_VER_ABBR: 3380200
+  PKG_VER: '3.38.2'
+  SQLITE_FNAME: sqlite-amalgamation-3380200
   PKG_REV: 1
   BUILD_NUMBER: ${{ github.run_number }}
-
-  SQLITE_FNAME: sqlite-amalgamation-${{ PKG_VER_ABBR }}.zip
-  SQLITE_DNAME: sqlite-amalgamation-${{ PKG_VER_ABBR }}
 
   SQLITE_SHA256: 8f766439c9fa1ae24ec1bdb71d7b58f0d9a90027cf03abdddb07b618e0a5332c
 
@@ -76,30 +73,30 @@ jobs:
 
     - name: Download SQLite
       run: |
-        curl --output ${{ SQLITE_FNAME }} https://www.sqlite.org/2022/${{ SQLITE_FNAME }}
+        curl --output ${{ env.SQLITE_FNAME }}.zip https://www.sqlite.org/2022/${{ env.SQLITE_FNAME }}.zip
 
     - name: Verify SQLite checksum
-      run: 7z h -scrcSHA256 ${{ env.SQLITE_FNAME }} | findstr /C:"SHA256 for data" | call devops\check-sha256 "${{ env.SQLITE_SHA256 }}"
+      run: 7z h -scrcSHA256 ${{ env.SQLITE_FNAME }}.zip | findstr /C:"SHA256 for data" | call devops\check-sha256 "${{ env.SQLITE_SHA256 }}"
 
-      # ${{ SQLITE_DNAME }} is the top directory in the archive
+      # ${{ env.SQLITE_FNAME }} is the top directory in the archive
     - name: Extract SQLite
       run: |
-        7z x ${{ env.SQLITE_FNAME }}
+        7z x ${{ env.SQLITE_FNAME }}.zip
 
     - name: Build x64/Release
-      working-directory: ${{ SQLITE_DNAME }}
+      working-directory: ${{ env.SQLITE_FNAME }}
       run: |
         mkdir Release
         cl /c /O2 /DNDEBUG /FoRelease\ sqlite3.c
         lib /MACHINE:X64 /OUT:Release\sqlite3.lib Release\sqlite3.obj
 
     - name: Build SQLite Shell
-      working-directory: ${{ SQLITE_DNAME }}
+      working-directory: ${{ env.SQLITE_FNAME }}
       run: |
         cl /O2 /DNDEBUG /FeRelease\sqlite3.exe sqlite3.c shell.c
 
     - name: Build x64/Debug
-      working-directory: ${{ SQLITE_DNAME }}
+      working-directory: ${{ env.SQLITE_FNAME }}
       run: |
         mkdir Debug
         cl /c /O2 /Zi /DNDEBUG /FoDebug\ sqlite3.c
@@ -108,22 +105,22 @@ jobs:
     - name: Collect build artifacts
       run: |
         mkdir nuget\build\native\include
-        copy ${{ SQLITE_DNAME }}\*.h nuget\build\native\include\
+        copy ${{ env.SQLITE_FNAME }}\*.h nuget\build\native\include\
 
         mkdir nuget\build\native\bin
-        copy /Y ${{ SQLITE_DNAME }}\Release\sqlite3.exe nuget\build\native\bin
+        copy /Y ${{ env.SQLITE_FNAME }}\Release\sqlite3.exe nuget\build\native\bin
 
         mkdir nuget\build\native\lib\x64\Release
-        copy /Y ${{ SQLITE_DNAME }}\Release\sqlite3.lib nuget\build\native\lib\x64\Release
+        copy /Y ${{ env.SQLITE_FNAME }}\Release\sqlite3.lib nuget\build\native\lib\x64\Release
 
         mkdir nuget\build\native\lib\x64\Debug
-        copy /Y ${{ SQLITE_DNAME }}\Debug\sqlite3.lib nuget\build\native\lib\x64\Debug
-        copy /Y ${{ SQLITE_DNAME }}\*.pdb nuget\build\native\lib\x64\Debug
+        copy /Y ${{ env.SQLITE_FNAME }}\Debug\sqlite3.lib nuget\build\native\lib\x64\Debug
+        copy /Y ${{ env.SQLITE_FNAME }}\*.pdb nuget\build\native\lib\x64\Debug
 
     - name: Clean up
       run: |
-        rmdir /S /Q ${{ SQLITE_DNAME }}
-        del /y ${{ env.SQLITE_FNAME }}
+        rmdir /S /Q ${{ env.SQLITE_FNAME }}
+        del /Q ${{ env.SQLITE_FNAME }}.zip
 
       # this is an unconventional use of the pre-release version - see README.md
     - name: Make CI Nuget package
