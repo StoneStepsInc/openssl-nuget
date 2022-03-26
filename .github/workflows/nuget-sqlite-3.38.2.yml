@@ -1,0 +1,153 @@
+#
+# The version part is immutable in the name, but the package revision
+# component after the dash should be kept in sync with `PKG_REV`.
+# GitHub doesn't allow variables in the workflow names, so this cannot
+# be automated.
+#
+# For new SQLite versions, rename this file with a new version name
+# to restart build numbers from `1`. This is necessary because GitHub
+# maintains build numbers per workflow file name.
+#
+name: SQLite v3.38.2-1
+
+#
+# When `publish-package` is set to `yes`, the workflow will build
+# the package and publish it to nuget.org. Otherwise, a package
+# will be built as an artifact and may be downloaded via GitHub UI.
+#
+# Published Nuget package will use the 4th version component as a
+# package revision number because Nuget lacks package revision
+# support.
+#
+# Without publishing, a Nuget package will be uploaded as a workflow
+# artifact and will be named using a pre-release version, which is
+# an unfortunate workaround for a lack of build promotion support
+# between GitHub and Nuget. This means that true pre-release packages
+# will conflict with CI packages, but for this repository this is
+# not an issue that will ever need to be addressed.
+#
+on:
+  workflow_dispatch:
+    inputs:
+      publish-package:
+        description: Publish Nuget Package?
+        required: false
+
+#
+# For each new SQLite release, change these variables:
+#
+#   * PKG_VER
+#
+# For each change in `PKG_VER`, `PKG_REV` must be reset to `1` (one).
+#
+# Package revision should be incremented by one every time package
+# content is changed in any way, such as changing compiler options,
+# adding or removing files, changing any text in README files, etc.
+#
+env:
+  PKG_VER: 3.38.2
+  PKG_VER_ABBR: 3380200
+  PKG_REV: 1
+  BUILD_NUMBER: ${{ github.run_number }}
+
+  SQLITE_FNAME: sqlite-amalgamation-${{ PKG_VER_ABBR }}.zip
+  SQLITE_DNAME: sqlite-amalgamation-${{ PKG_VER_ABBR }}
+
+  SQLITE_SHA256: 8f766439c9fa1ae24ec1bdb71d7b58f0d9a90027cf03abdddb07b618e0a5332c
+
+  # for VS Community Edition, replace `Enterprise` with `Community` in the path
+  VCVARSALL: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall'
+
+  # Nuget Gallery (www.nuget.org) publish URL
+  NUGET_PUB_URL: https://api.nuget.org/v3/index.json
+
+defaults:
+  run:
+    shell: cmd
+
+jobs:
+  build-sqlite:
+    name: Build sqlite
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Download SQLite
+      run: |
+        curl --output ${{ SQLITE_FNAME }} https://www.sqlite.org/2022/${{ SQLITE_FNAME }}
+
+    - name: Verify SQLite checksum
+      run: 7z h -scrcSHA256 ${{ env.SQLITE_FNAME }} | findstr /C:"SHA256 for data" | call devops\check-sha256 "${{ env.SQLITE_SHA256 }}"
+
+      # ${{ SQLITE_DNAME }} is the top directory in the archive
+    - name: Extract SQLite
+      run: |
+        7z x ${{ env.SQLITE_FNAME }}
+
+    - name: Build x64/Release
+      working-directory: ${{ SQLITE_DNAME }}
+      run: |
+        mkdir Release
+        cl /c /O2 /DNDEBUG /FoRelease\ sqlite3.c
+        lib /MACHINE:X64 /OUT:Release\sqlite3.lib Release\sqlite3.obj
+
+    - name: Build SQLite Shell
+      working-directory: ${{ SQLITE_DNAME }}
+      run: |
+        cl /O2 /DNDEBUG /FeRelease\sqlite3.exe sqlite3.c shell.c
+
+    - name: Build x64/Debug
+      working-directory: ${{ SQLITE_DNAME }}
+      run: |
+        mkdir Debug
+        cl /c /O2 /Zi /DNDEBUG /FoDebug\ sqlite3.c
+        lib /MACHINE:X64 /OUT:Debug\sqlite3.lib Debug\sqlite3.obj
+
+    - name: Collect build artifacts
+      run: |
+        mkdir nuget\build\native\include
+        copy ${{ SQLITE_DNAME }}\*.h nuget\build\native\include\
+
+        mkdir nuget\build\native\bin
+        copy /Y ${{ SQLITE_DNAME }}\Release\sqlite3.exe nuget\build\native\bin
+
+        mkdir nuget\build\native\lib\x64\Release
+        copy /Y ${{ SQLITE_DNAME }}\Release\sqlite3.lib nuget\build\native\lib\x64\Release
+
+        mkdir nuget\build\native\lib\x64\Debug
+        copy /Y ${{ SQLITE_DNAME }}\Debug\sqlite3.lib nuget\build\native\lib\x64\Debug
+        copy /Y ${{ SQLITE_DNAME }}\*.pdb nuget\build\native\lib\x64\Debug
+
+    - name: Clean up
+      run: |
+        rmdir /S /Q ${{ SQLITE_DNAME }}
+        del /y ${{ env.SQLITE_FNAME }}
+
+      # this is an unconventional use of the pre-release version - see README.md
+    - name: Make CI Nuget package
+      if: ${{ github.event.inputs.publish-package != 'yes' }}
+      run: |
+        nuget pack nuget\StoneSteps.SQLite.Static.nuspec -Suffix "ci.%BUILD_NUMBER%" -Version ${{ env.PKG_VER }}.${{ env.PKG_REV }}
+
+    - name: Upload CI Nuget package
+      if: ${{ github.event.inputs.publish-package != 'yes' }}
+      uses: actions/upload-artifact@v2.2.1
+      with:
+        name: SQLite CI Nuget package
+        path: StoneSteps.SQLite.Static.${{ env.PKG_VER }}.${{ env.PKG_REV }}-ci.${{ env.BUILD_NUMBER }}.nupkg
+
+      #
+      # Use `-Version` explicitly to override the version in the manifest,
+      # so we can usurp the 4th version component for the package revision.
+      #
+    - name: Make Nuget package
+      if: ${{ github.event.inputs.publish-package == 'yes' }}
+      run: |
+        nuget pack nuget\StoneSteps.SQLite.Static.nuspec -Version ${{ env.PKG_VER }}.${{ env.PKG_REV }}
+
+    - name: Publish Nuget package
+      if: ${{ github.event.inputs.publish-package == 'yes' }}
+      run: |
+        nuget push StoneSteps.SQLite.Static.${{ env.PKG_VER }}.${{ env.PKG_REV }}.nupkg -Source ${{ env.NUGET_PUB_URL }} -ApiKey "${{ secrets.NUGET_API_KEY }}" -NonInteractive

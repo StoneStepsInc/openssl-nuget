@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>StoneSteps.SQLite.Static</id>
+    <version>3.38.2</version>
+    <authors>SQLite (contents)</authors>
+    <owners>Stone Steps (package)</owners>
+    <license type="file">LICENSE.md</license>
+    <projectUrl>https://github.com/StoneStepsInc/sqlite-nuget</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A SQLite library for MSVC projects.</description>
+    <releaseNotes>
+Package Notes:
+
+  * Static libraries built for the x64 platforms and Debug/Release
+    configurations.
+
+SQLite downloads:
+
+https://www.sqlite.org/download.html
+    </releaseNotes>
+    <copyright>SQLite</copyright>
+    <tags>SQLite, database, native, library</tags>
+  </metadata>
+  <files>
+   <file src="README.txt" target="" />
+   <file src="LICENSE.md" target=""/>
+   <file src="build\**\*" target="build" />
+</files>
+</package>
