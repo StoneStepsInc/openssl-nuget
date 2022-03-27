@@ -7,7 +7,7 @@
 # collected SQLite build artifacts
 /nuget/build/native/include/
 /nuget/build/native/lib/
-/nuget/licenses/
+/nuget/build/native/bin/
 
 # locally-built Nuget package
 /StoneSteps.SQLite.Static.*.nupkg
