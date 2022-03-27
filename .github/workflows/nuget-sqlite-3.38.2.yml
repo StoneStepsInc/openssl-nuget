@@ -106,7 +106,7 @@ jobs:
     - name: Collect build artifacts
       run: |
         mkdir nuget\build\native\include
-        copy ${{ env.SQLITE_FNAME }}\*.h nuget\build\native\include\
+        copy /Y ${{ env.SQLITE_FNAME }}\*.h nuget\build\native\include\
 
         mkdir nuget\build\native\bin
         copy /Y ${{ env.SQLITE_FNAME }}\Release\sqlite3.exe nuget\build\native\bin

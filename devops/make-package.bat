@@ -69,7 +69,7 @@ rem
 rem Create a Nuget package
 rem
 mkdir ..\nuget\build\native\include
-copy *.h ..\nuget\build\native\include\
+copy /Y *.h ..\nuget\build\native\include\
 
 mkdir ..\nuget\build\native\bin
 copy /Y Release\sqlite3.exe ..\nuget\build\native\bin
