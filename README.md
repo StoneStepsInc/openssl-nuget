@@ -50,10 +50,9 @@ SQLite version is located in a few places in this repository and
 needs to be changed in all of them for a new version of SQLite.
 
   * nuget/StoneSteps.SQLite.Static.nuspec (`version`)
-  * devops/make-package.bat (`PKG_VER`, `PKG_VER_ABBR`, `PKG_REV`,
-    `SRC_TAG`)
+  * devops/make-package.bat (`PKG_VER`, `PKG_REV`, `PKG_VER_ABBR`)
   * .github/workflows/nuget-sqlite-3.38.2.yml (`name`, `PKG_VER`,
-    `PKG_VER_ABBR`, `PKG_REV`, `SRC_TAG`)
+    `PKG_REV`, `SQLITE_FNAME`)
 
 In the GitHub workflow YAML, `PKG_REV` must be reset to `1` (one)
 every time SQLite version is changed. The workflow file must
@@ -98,5 +97,14 @@ Run `make-package.bat` from the repository root directory with
 a package revision as the first argument. There is no provision
 to manage build numbers from the command line and other tools
 should be used for this (e.g. Artifactory).
+
+## Sample Application
+
+A Visual Studio project is included in this repository under
+`sample-sqlite` to test the Nuget package built by this project.
+
+This application does not do anything useful and merely calls
+SQLite functions to verify that the package is installed
+properly for all platforms and configurations.
 
 [nuget.org]: https://www.nuget.org/packages/StoneSteps.SQLite.Static/
