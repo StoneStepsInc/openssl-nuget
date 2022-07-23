@@ -8,7 +8,7 @@
 # to restart build numbers from `1`. This is necessary because GitHub
 # maintains build numbers per workflow file name.
 #
-name: SQLite v3.38.2-2
+name: SQLite v3.39.2-1
 
 #
 # When `publish-package` is set to `yes`, the workflow will build
@@ -45,12 +45,13 @@ on:
 # adding or removing files, changing any text in README files, etc.
 #
 env:
-  PKG_VER: '3.38.2'
-  SQLITE_FNAME: sqlite-amalgamation-3380200
-  PKG_REV: 2
+  PKG_VER: '3.39.2'
+  PKG_REV: 1
+  SQLITE_FNAME: sqlite-amalgamation-3390200
+  SQLITE_URL_BASE: 'https://www.sqlite.org/2022'
   BUILD_NUMBER: ${{ github.run_number }}
 
-  SQLITE_SHA256: 8f766439c9fa1ae24ec1bdb71d7b58f0d9a90027cf03abdddb07b618e0a5332c
+  SQLITE_SHA256: 87775784f8b22d0d0f1d7811870d39feaa7896319c7c20b849a4181c5a50609b
 
   # for VS Community Edition, replace `Enterprise` with `Community` in the path
   VCVARSALL: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall'
@@ -73,7 +74,7 @@ jobs:
 
     - name: Download SQLite
       run: |
-        curl --output ${{ env.SQLITE_FNAME }}.zip https://www.sqlite.org/2022/${{ env.SQLITE_FNAME }}.zip
+        curl --output ${{ env.SQLITE_FNAME }}.zip ${{ env.SQLITE_URL_BASE }}/${{ env.SQLITE_FNAME }}.zip
 
     - name: Verify SQLite checksum
       run: 7z h -scrcSHA256 ${{ env.SQLITE_FNAME }}.zip | findstr /C:"SHA256 for data" | call devops\check-sha256 "${{ env.SQLITE_SHA256 }}"

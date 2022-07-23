@@ -7,15 +7,15 @@ if "%~1" == "" (
   goto :EOF
 )
 
-set PKG_VER=3.38.2
-set PKG_VER_ABBR=3380200
+set PKG_VER=3.39.2
+set PKG_VER_ABBR=3390200
 set PKG_REV=%~1
 
 set SQLITE_FNAME=sqlite-amalgamation-%PKG_VER_ABBR%.zip
 set SQLITE_DNAME=sqlite-amalgamation-%PKG_VER_ABBR%
 
-rem original SQLite SHA3-256 hash: 00a008f1df87764c9ae794e9e7a68ae9a377f807d03c7a3ea9fc0ac3a1a1236f
-set SQLITE_SHA256=8f766439c9fa1ae24ec1bdb71d7b58f0d9a90027cf03abdddb07b618e0a5332c
+rem original SQLite SHA3-256 hash: deb2abef617b6305525e3b1a2b39a5dc095ffb62f243b4d1b468ba5f41900ce7
+set SQLITE_SHA256=87775784f8b22d0d0f1d7811870d39feaa7896319c7c20b849a4181c5a50609b
 
 set SEVENZIP_EXE=c:\Program Files\7-Zip\7z.exe
 set VCVARSALL=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall
