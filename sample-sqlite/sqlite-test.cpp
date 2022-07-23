@@ -94,7 +94,7 @@ int main(void)
          throw std::runtime_error(errmsg);
 
       if(sqlite3_close(ppDb) != SQLITE_OK)
-         fprintf(stderr, "Failed to close the test SQLite database");
+         fprintf(stderr, "Failed to close the test SQLite database\n");
 
       return EXIT_SUCCESS;
    }
@@ -104,7 +104,7 @@ int main(void)
 
    if(ppDb) {
       if(sqlite3_close(ppDb) != SQLITE_OK)
-         fprintf(stderr, "Failed to close the test SQLite database");
+         fprintf(stderr, "Failed to close the test SQLite databasen\n");
    }
 
    return EXIT_FAILURE;
