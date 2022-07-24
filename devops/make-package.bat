@@ -81,9 +81,6 @@ mkdir ..\nuget\build\native\lib\x64\Debug
 copy /Y Debug\sqlite3.lib ..\nuget\build\native\lib\x64\Debug
 copy /Y *.pdb ..\nuget\build\native\lib\x64\Debug
 
-rem README.txt is shown by VS after installing; README.md is shown on nuget.org
-copy /Y ..\nuget\README.txt ..\nuget\README.md
-
 cd ..
 
 nuget pack nuget\StoneSteps.SQLite.Static.nuspec -Version %PKG_VER%.%PKG_REV%

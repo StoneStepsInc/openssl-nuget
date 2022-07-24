@@ -119,8 +119,6 @@ jobs:
         copy /Y ${{ env.SQLITE_FNAME }}\Debug\sqlite3.lib nuget\build\native\lib\x64\Debug
         copy /Y ${{ env.SQLITE_FNAME }}\*.pdb nuget\build\native\lib\x64\Debug
 
-        copy /Y nuget\README.txt nuget\README.md
-
     - name: Clean up
       run: |
         rmdir /S /Q ${{ env.SQLITE_FNAME }}
