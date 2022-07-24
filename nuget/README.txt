@@ -13,3 +13,8 @@ for build configurations named Debug and Release and will
 not work for any other configuration names. Do not install this
 package for projects with configurations other than Debug and
 Release.
+
+See project repository for more information.
+
+https://github.com/StoneStepsInc/sqlite-nuget
+

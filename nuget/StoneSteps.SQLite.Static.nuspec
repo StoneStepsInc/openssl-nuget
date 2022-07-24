@@ -9,25 +9,23 @@
     <projectUrl>https://github.com/StoneStepsInc/sqlite-nuget</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A SQLite library for MSVC projects.</description>
+    <readme>README.md</readme>
     <releaseNotes>
 Package Notes:
 
-  * Static libraries built for the x64 platforms and Debug/Release
+  * Static libraries built for the x64 platform and Debug/Release
     configurations.
 
 SQLite 3.39.2 Release Notes:
 
 https://www.sqlite.org/releaselog/3_39_2.html
-
-SQLite downloads:
-
-https://www.sqlite.org/download.html
     </releaseNotes>
     <copyright>SQLite</copyright>
     <tags>SQLite, database, native, library</tags>
   </metadata>
   <files>
    <file src="README.txt" target="" />
+   <file src="README.md" target="" />
    <file src="LICENSE.md" target=""/>
    <file src="build\**\*" target="build" />
 </files>

@@ -50,7 +50,7 @@ SQLite version is located in a few places in this repository and
 needs to be changed in all of them for a new version of SQLite.
 
   * nuget/StoneSteps.SQLite.Static.nuspec (`version`)
-  * devops/make-package.bat (`PKG_VER`, `PKG_REV`, `PKG_VER_ABBR`)
+  * devops/make-package.bat (`PKG_VER`, `PKG_VER_ABBR`)
   * .github/workflows/nuget-sqlite-3.38.2.yml (`name`, `PKG_VER`,
     `PKG_REV`, `SQLITE_FNAME`)
 

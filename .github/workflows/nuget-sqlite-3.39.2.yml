@@ -8,7 +8,7 @@
 # to restart build numbers from `1`. This is necessary because GitHub
 # maintains build numbers per workflow file name.
 #
-name: SQLite v3.39.2-1
+name: SQLite v3.39.2-2
 
 #
 # When `publish-package` is set to `yes`, the workflow will build
@@ -30,7 +30,7 @@ on:
   workflow_dispatch:
     inputs:
       publish-package:
-        description: Publish Nuget Package?
+        description: Publish Nuget Package (yes/no)?
         required: false
 
 #
@@ -46,7 +46,7 @@ on:
 #
 env:
   PKG_VER: '3.39.2'
-  PKG_REV: 1
+  PKG_REV: 2
   SQLITE_FNAME: sqlite-amalgamation-3390200
   SQLITE_URL_BASE: 'https://www.sqlite.org/2022'
   BUILD_NUMBER: ${{ github.run_number }}
@@ -118,6 +118,8 @@ jobs:
         mkdir nuget\build\native\lib\x64\Debug
         copy /Y ${{ env.SQLITE_FNAME }}\Debug\sqlite3.lib nuget\build\native\lib\x64\Debug
         copy /Y ${{ env.SQLITE_FNAME }}\*.pdb nuget\build\native\lib\x64\Debug
+
+        copy /Y nuget\README.txt nuget\README.md
 
     - name: Clean up
       run: |
