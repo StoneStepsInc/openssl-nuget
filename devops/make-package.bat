@@ -18,7 +18,6 @@ rem original SQLite SHA3-256 hash: 96894cf2c57f76ccbeda41aa6ff0ce1f6b093deced833
 set SQLITE_SHA256=9c99955b21d2374f3a385d67a1f64cbacb1d4130947473d25c77ad609c03b4cd
 
 set SEVENZIP_EXE=c:\Program Files\7-Zip\7z.exe
-set VCVARSALL=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall
 
 curl --output %SQLITE_FNAME% https://www.sqlite.org/2022/%SQLITE_FNAME%
 
@@ -36,7 +35,7 @@ cd %SQLITE_DNAME%
 rem
 rem Replace `Community` with `Enterprise` for Enterprise Edition
 rem
-set VCVARSALL=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall
+set VCVARSALL=C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvarsall
 
 rem
 rem Set up environment for the VC++ x64 platform
