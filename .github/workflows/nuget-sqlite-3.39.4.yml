@@ -51,7 +51,7 @@ env:
   SQLITE_URL_BASE: 'https://www.sqlite.org/2022'
   BUILD_NUMBER: ${{ github.run_number }}
 
-  SQLITE_SHA256: 87775784f8b22d0d0f1d7811870d39feaa7896319c7c20b849a4181c5a50609b
+  SQLITE_SHA256: 9c99955b21d2374f3a385d67a1f64cbacb1d4130947473d25c77ad609c03b4cd
 
   # for VS Community Edition, replace `Enterprise` with `Community` in the path
   VCVARSALL: 'C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsall'
@@ -65,7 +65,7 @@ defaults:
 
 jobs:
   build-sqlite:
-    name: Build sqlite
+    name: Build SQLite
     runs-on: windows-2022
     
     steps:
