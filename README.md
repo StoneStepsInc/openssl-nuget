@@ -88,7 +88,7 @@ unknowns into the final package (e.g. build VM was updated).
 ## Building Package Locally
 
 You can build a Nuget package locally with `make-package.bat`
-located in `devops`. This script expects VS2019 Community Edition
+located in `devops`. This script expects VS2022 Community Edition
 installed in the default location. If you have other edition of
 Visual Studio, edit the file to use the correct path to the
 `vcvarsall.bat` file.
