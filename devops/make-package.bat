@@ -54,14 +54,14 @@ rem
 
 mkdir Release
 
-cl /c /MD /O2 /Zi /DNDEBUG /FoRelease\ sqlite3.c
+cl /c /MD /O2 /Zi /DNDEBUG /DSQLITE_ENABLE_MATH_FUNCTIONS /FoRelease\ sqlite3.c
 lib /MACHINE:X64 /OUT:Release\sqlite3.lib Release\sqlite3.obj
 
-cl /MD /O2 /DNDEBUG /FeRelease\sqlite3.exe sqlite3.c shell.c
+cl /MD /O2 /DNDEBUG /DSQLITE_ENABLE_MATH_FUNCTIONS /FeRelease\sqlite3.exe sqlite3.c shell.c
 
 mkdir Debug
 
-cl /c /MDd /Od /Zi /FoDebug\ sqlite3.c 
+cl /c /MDd /Od /Zi /DSQLITE_ENABLE_MATH_FUNCTIONS /FoDebug\ sqlite3.c 
 lib /MACHINE:X64 /OUT:Debug\sqlite3.lib Debug\sqlite3.obj
 
 rem
