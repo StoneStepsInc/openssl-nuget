@@ -82,4 +82,4 @@ copy /Y *.pdb ..\nuget\build\native\lib\x64\Debug
 
 cd ..
 
-nuget pack nuget\StoneSteps.SQLite.Static.nuspec -Version %PKG_VER%.%PKG_REV%
+nuget pack nuget\StoneSteps.SQLite.VS2022.Static.nuspec -Version %PKG_VER%.%PKG_REV%

@@ -25,7 +25,8 @@ for build configurations named `Debug` and `Release` and will not
 work for any other configuration names. Do not install this package
 for projects with configurations other than `Debug` and `Release`.
 
-See `StoneSteps.SQLite.Static.props` and `StoneSteps.SQLite.Static.targets`
+See `StoneSteps.SQLite.VS2022.Static.props` and
+`StoneSteps.SQLite.VS2022.Static.targets`
 for specific package configuration details and file locations.
 
 ## Package Version
@@ -49,7 +50,7 @@ build a package with the revision `123`.
 SQLite version is located in a few places in this repository and
 needs to be changed in all of them for a new version of SQLite.
 
-  * nuget/StoneSteps.SQLite.Static.nuspec (`version`)
+  * nuget/StoneSteps.SQLite.VS2022.Static.nuspec (`version`)
   * devops/make-package.bat (`PKG_VER`, `PKG_VER_ABBR`)
   * .github/workflows/nuget-sqlite-3.38.2.yml (`name`, `PKG_VER`,
     `PKG_REV`, `SQLITE_FNAME`)
@@ -107,4 +108,4 @@ This application does not do anything useful and merely calls
 SQLite functions to verify that the package is installed
 properly for all platforms and configurations.
 
-[nuget.org]: https://www.nuget.org/packages/StoneSteps.SQLite.Static/
+[nuget.org]: https://www.nuget.org/packages/StoneSteps.SQLite.VS2022.Static/

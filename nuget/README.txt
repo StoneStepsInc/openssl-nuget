@@ -1,5 +1,6 @@
 This package contains static SQLite libraries and header files
-for the x64 platform and Debug/Release configurations.
+for the x64 platform and Debug/Release configurations  built with
+Visual C++ 2022, against Debug/Release MT/DLL MSVC CRT.
 
 The SQLite static library appropriate for the platform and
 configuration selected in a Visual Studio solution is explicitly
