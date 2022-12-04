@@ -54,14 +54,14 @@ rem
 
 mkdir Release
 
-cl /c /MD /O2 /Zi /DNDEBUG /DSQLITE_ENABLE_MATH_FUNCTIONS /FoRelease\ sqlite3.c
+cl /c /MD /O2 /Zi /DNDEBUG /DSQLITE_ENABLE_MATH_FUNCTIONS /FoRelease\ /FdRelease\sqlite3.pdb sqlite3.c
 lib /MACHINE:X64 /OUT:Release\sqlite3.lib Release\sqlite3.obj
 
 cl /MD /O2 /DNDEBUG /DSQLITE_ENABLE_MATH_FUNCTIONS /FeRelease\sqlite3.exe sqlite3.c shell.c
 
 mkdir Debug
 
-cl /c /MDd /Od /Zi /DSQLITE_ENABLE_MATH_FUNCTIONS /FoDebug\ sqlite3.c 
+cl /c /MDd /Od /Zi /DSQLITE_ENABLE_MATH_FUNCTIONS /FoDebug\ /FdDebug\sqlite3.pdb sqlite3.c 
 lib /MACHINE:X64 /OUT:Debug\sqlite3.lib Debug\sqlite3.obj
 
 rem
@@ -75,10 +75,11 @@ copy /Y Release\sqlite3.exe ..\nuget\build\native\bin
 
 mkdir ..\nuget\build\native\lib\x64\Release
 copy /Y Release\sqlite3.lib ..\nuget\build\native\lib\x64\Release
+copy /Y Release\sqlite3.pdb ..\nuget\build\native\lib\x64\Release
 
 mkdir ..\nuget\build\native\lib\x64\Debug
 copy /Y Debug\sqlite3.lib ..\nuget\build\native\lib\x64\Debug
-copy /Y *.pdb ..\nuget\build\native\lib\x64\Debug
+copy /Y Debug\sqlite3.pdb ..\nuget\build\native\lib\x64\Debug
 
 cd ..
 
