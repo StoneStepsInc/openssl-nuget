@@ -1,8 +1,7 @@
 ## SQLite Nuget Package
 
 This project builds a SQLite Nuget package with static SQLite
-libraries and header files  for the `x64` platform and
-`Debug`/`Release` configurations.
+libraries and header files  for the `x64` platform.
 
 Visit SQLite project for SQLite library documentation:
 
@@ -10,8 +9,8 @@ https://www.sqlite.org/
 
 ## Package Configuration
 
-This package contains only static libraries for platforms and
-configurations listed above.
+This package contains only static libraries for platforms listed
+above.
 
 The SQLite static library appropriate for the platform and
 configuration selected in a Visual Studio solution is explicitly
@@ -108,7 +107,7 @@ Visual Studio, edit the file to use the correct path to the
 Run `make-package.bat` from the repository root directory with
 a package revision as the first argument. There is no provision
 to manage build numbers from the command line and other tools
-should be used for this (e.g. Artifactory).
+should be used for this.
 
 ## Sample Application
 
