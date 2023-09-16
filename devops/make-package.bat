@@ -7,19 +7,20 @@ if "%~1" == "" (
   goto :EOF
 )
 
-set PKG_VER=3.39.4
-set PKG_VER_ABBR=3390400
+set PKG_VER=3.43.0
+set PKG_VER_ABBR=3430000
 set PKG_REV=%~1
 
 set SQLITE_FNAME=sqlite-amalgamation-%PKG_VER_ABBR%.zip
 set SQLITE_DNAME=sqlite-amalgamation-%PKG_VER_ABBR%
+set SQLITE_URL_BASE=https://www.sqlite.org/2023
 
-rem original SQLite SHA3-256 hash: 96894cf2c57f76ccbeda41aa6ff0ce1f6b093deced8335801d38ddb34ec9690e
-set SQLITE_SHA256=9c99955b21d2374f3a385d67a1f64cbacb1d4130947473d25c77ad609c03b4cd
+rem original SQLite SHA3-256 hash: 1286856f5dff3b145f02dfe5aa626657c172a415889e5a265dc4dee83a799c03
+set SQLITE_SHA256=bb5849ae4d7129c09d20596379a0b3f7b1ac59cf9998eba5ef283ea9b6c000a5
 
 set SEVENZIP_EXE=c:\Program Files\7-Zip\7z.exe
 
-curl --output %SQLITE_FNAME% https://www.sqlite.org/2022/%SQLITE_FNAME%
+curl --output %SQLITE_FNAME% %SQLITE_URL_BASE%/%SQLITE_FNAME%
 
 "%SEVENZIP_EXE%" h -scrcSHA256 %SQLITE_FNAME% | findstr /C:"SHA256 for data" | call devops\check-sha256 "%SQLITE_SHA256%"
 
