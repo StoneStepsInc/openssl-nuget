@@ -9,11 +9,21 @@ folder tree after the package is installed. The solution may need
 to be reloaded to make the library file visible. This library may
 be moved into any solution folder after the installation.
 
-Note that the SQLite library path in this package is valid only
-for build configurations named Debug and Release and will
-not work for any other configuration names. Do not install this
-package for projects with configurations other than Debug and
-Release.
+Note that the SQLite library path in this package will be selected
+as Debug or Release based on whether the active configuration
+is designated as a development or as a release configuration in
+the underlying .vcxproj file.
+
+Specifically, the initial project configurations have a property
+called UseDebugLibraries in the underlying .vcxproj file, which
+reflects whether the configuration is intended for building release
+or development artifacts. Additional configurations copied from
+these initial ones inherit this property. Manually created
+configurations should have this property defined in the .vcxproj
+file.
+
+Do not install this package if your projects use configurations
+without the UseDebugLibraries property.
 
 See project repository for more information.
 
