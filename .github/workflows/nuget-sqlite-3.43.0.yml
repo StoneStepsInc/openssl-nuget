@@ -51,7 +51,7 @@ env:
   SQLITE_URL_BASE: 'https://www.sqlite.org/2023'
   BUILD_NUMBER: ${{ github.run_number }}
 
-  SQLITE_SHA256: 9c99955b21d2374f3a385d67a1f64cbacb1d4130947473d25c77ad609c03b4cd
+  SQLITE_SHA256: bb5849ae4d7129c09d20596379a0b3f7b1ac59cf9998eba5ef283ea9b6c000a5
 
   # for VS Community Edition, replace `Enterprise` with `Community` in the path
   VCVARSALL: 'C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsall'
