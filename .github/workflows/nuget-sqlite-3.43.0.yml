@@ -114,11 +114,11 @@ jobs:
 
         mkdir nuget\build\native\lib\x64\Release
         copy /Y ${{ env.SQLITE_FNAME }}\Release\sqlite3.lib nuget\build\native\lib\x64\Release
-        copy /Y ${{ env.SQLITE_FNAME }}\sqlite3.pdb nuget\build\native\lib\x64\Release
+        copy /Y ${{ env.SQLITE_FNAME }}\Release\sqlite3.pdb nuget\build\native\lib\x64\Release
 
         mkdir nuget\build\native\lib\x64\Debug
         copy /Y ${{ env.SQLITE_FNAME }}\Debug\sqlite3.lib nuget\build\native\lib\x64\Debug
-        copy /Y ${{ env.SQLITE_FNAME }}\sqlite3.pdb nuget\build\native\lib\x64\Debug
+        copy /Y ${{ env.SQLITE_FNAME }}\Debug\sqlite3.pdb nuget\build\native\lib\x64\Debug
 
     - name: Clean up
       run: |
