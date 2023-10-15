@@ -15,6 +15,7 @@ Package Notes:
   * Static libraries for x64 platform
   * Built in Visual C++ 2022, against Debug/Release MT/DLL MSVC CRT
   * with SQLITE_ENABLE_MATH_FUNCTIONS
+  * Static libraries in this package are not injected into static library projects
 
 SQLite 3.43.0 Release Notes:
 
