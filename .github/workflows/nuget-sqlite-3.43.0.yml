@@ -8,7 +8,7 @@
 # to restart build numbers from `1`. This is necessary because GitHub
 # maintains build numbers per workflow file name.
 #
-name: SQLite v3.43.0-2
+name: SQLite v3.43.2-1
 
 #
 # When `publish-package` is set to `yes`, the workflow will build
@@ -45,9 +45,9 @@ on:
 # adding or removing files, changing any text in README files, etc.
 #
 env:
-  PKG_VER: '3.43.0'
-  PKG_REV: 2
-  SQLITE_FNAME: sqlite-amalgamation-3430000
+  PKG_VER: '3.43.2'
+  PKG_REV: 1
+  SQLITE_FNAME: sqlite-amalgamation-3430200
   SQLITE_URL_BASE: 'https://www.sqlite.org/2023'
   BUILD_NUMBER: ${{ github.run_number }}
 
