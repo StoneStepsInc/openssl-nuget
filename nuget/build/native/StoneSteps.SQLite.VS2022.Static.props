@@ -2,8 +2,6 @@
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="UserMacros">
     <SQLiteLibName>sqlite3</SQLiteLibName>
-  </PropertyGroup>
-  <PropertyGroup Label="UserMacros">
     <!-- Define a macro that can be used in project files to reference package directories -->
     <SQLiteDir>$(MSBuildThisFileDirectory)</SQLiteDir>
   </PropertyGroup>
