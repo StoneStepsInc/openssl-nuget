@@ -3,4 +3,16 @@
   <ItemGroup>
     <ClCompile Include="sqlite-test.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Filter Include="lib">
+      <UniqueIdentifier>{8a4a44ab-806a-4080-8dfb-ad48e0ba724c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lib\Debug">
+      <UniqueIdentifier>{f144aef8-3aab-4b0e-a20a-3cb2394eb02a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lib\Release">
+      <UniqueIdentifier>{c0c62e6a-1651-4f4a-bda8-713c9521b4ed}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
 </Project>
