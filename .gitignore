@@ -20,3 +20,4 @@ StoneSteps.SQLite.VS2022.Static.*.nupkg
 /sample-sqlite/packages/
 /sample-sqlite/packages.config
 /sample-sqlite/sqlite-test.db
+/sample-sqlite/sample-sqlite/x64
