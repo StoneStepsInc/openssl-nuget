@@ -1,9 +1,9 @@
 # Visual Studio files
-.vs/
+/.vs/
 
 # SQLite source
-sqlite-amalgamation-*/
-sqlite-amalgamation-*.zip
+/sqlite-amalgamation-*/
+/sqlite-amalgamation-*.zip
 
 # collected SQLite build artifacts
 nuget/build/native/include/
@@ -14,9 +14,9 @@ nuget/build/native/bin/
 StoneSteps.SQLite.VS2022.Static.*.nupkg
 
 # sample app for testing the Nuget package
-sample-sqlite/.vs/
-sample-sqlite/sample-sqlite.vcxproj.user
-sample-sqlite/x64/
-sample-sqlite/packages/
-sample-sqlite/packages.config
-sample-sqlite/sqlite-test.db
+/sample-sqlite/.vs/
+/sample-sqlite/sample-sqlite.vcxproj.user
+/sample-sqlite/x64/
+/sample-sqlite/packages/
+/sample-sqlite/packages.config
+/sample-sqlite/sqlite-test.db
